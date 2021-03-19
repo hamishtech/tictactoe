@@ -5,7 +5,9 @@
 }
 
 body {
-  background-color: #10002b;
+  background-color: #000000;
+  opacity: 1;
+  height: 98vh;
 }
 
 .tracker {
@@ -21,11 +23,11 @@ body {
 }
 
 .gameContainer div {
-  background-color: #7b2cbf;
+  background-color: #3a365b;
   border: solid;
   border-width: 2px;
   padding: 5px;
-  color: white;
+  color: #45b7f7;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +35,7 @@ body {
 }
 
 .gameContainer div:hover {
-  opacity: 50%;
+  opacity: 90%;
   cursor: pointer;
 }
 

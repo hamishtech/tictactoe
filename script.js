@@ -1,8 +1,8 @@
 const board = (() => {
   let arr = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ];
 
   //create DOM to replicate arr
@@ -28,6 +28,24 @@ const board = (() => {
     }
   };
 
+  //setting up players and boardStatus
+  let gameMode = "AI";
+  let currentPlayer = 1;
+  let lastPlayer = 0;
+  let status = "";
+  let turnsPlayed = 0;
+
+  //change player
+  const changePlayer = () => {
+    if (currentPlayer == 1) {
+      lastPlayer = 1;
+      currentPlayer = 2;
+    } else {
+      currentPlayer = 1;
+      lastPlayer = 2;
+    }
+  };
+
   //updates DOM based on play function inputs
   const updateDOM = (r, c, marker) => {
     let box = document.querySelector(`[data-id="${r}${c}"]`);
@@ -35,18 +53,26 @@ const board = (() => {
   };
 
   //play function which will be accessed by player Obj
-  const play = (r, c, marker) => (
+  const play = (r, c, marker) => {
     (arr[r][c] = marker),
-    updateDOM(r, c, marker),
-    turnsPlayed++,
-    updateTracker()
-  );
+      updateDOM(r, c, marker),
+      turnsPlayed++,
+      updateTracker(),
+      changePlayer();
+  };
 
-  //setting up players and boardStatus
-  let currentPlayer = 1;
-  let lastPlayer = 0;
-  let status = "";
-  let turnsPlayed = 0;
+  const AIplay = () => {
+    if (gameMode != "AI") {
+      return;
+    }
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[i][j] == "") {
+          return playerTwo.play(i, j);
+        }
+      }
+    }
+  };
 
   const boxEventListener = () => {
     const boxes = document.querySelectorAll("[data-type='box']");
@@ -60,12 +86,11 @@ const board = (() => {
         }
         if (currentPlayer == 1) {
           playerOne.play(r, c);
-          lastPlayer = 1;
-          currentPlayer = 2;
+          if (board.status != "won" && turnsPlayed != "") {
+            AIplay();
+          }
         } else {
           playerTwo.play(r, c);
-          lastPlayer = 2;
-          currentPlayer = 1;
         }
       })
     );
@@ -152,16 +177,16 @@ const board = (() => {
 
   const newGame = () => {
     arr = [
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9],
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
     ];
     emptyDOM();
     arrToDOM();
     boxEventListener();
     currentPlayer = 1;
     lastPlayer = 0;
-    status = "";
+    board.status = "";
     turnsPlayed = 0;
   };
   return {
@@ -197,4 +222,4 @@ let Player = function (name, marker) {
 //function to make player play
 
 let playerOne = Player("jeff", "X");
-let playerTwo = Player("james", "O");
+let playerTwo = Player("AI", "O");
