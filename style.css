@@ -8,6 +8,10 @@ body {
   background-color: #10002b;
 }
 
+.tracker {
+  color: white;
+}
+
 .gameContainer {
   margin-top: 50px;
   display: grid;
@@ -22,6 +26,10 @@ body {
   border-width: 2px;
   padding: 5px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
 }
 
 .gameContainer div:hover {
