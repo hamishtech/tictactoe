@@ -196,5 +196,10 @@ let Player = function (name, marker) {
 };
 //function to make player play
 
+<<<<<<< Updated upstream
 let playerOne = Player("jeff", "X");
 let playerTwo = Player("james", "O");
+=======
+let playerOne = Player("Amelie", "X");
+let playerTwo = Player("AI", "O");
+>>>>>>> Stashed changes
